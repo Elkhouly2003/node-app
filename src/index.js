@@ -1,0 +1,22 @@
+const express = require("express");
+const mongoose = require("mongoose");
+
+const PORT = process.env.PORT;
+const app = express();
+
+//connect to data base
+const DB_USER = "root";
+const DB_PASSWORD = "example";
+const DB_PORT = 27017;
+const DB_HOST = `mongo`;
+const URI = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`;
+mongoose
+  .connect(URI)
+  .then(() => console.log("Connected"))
+  .catch((err) => {
+    console.log("Failed To Connect To Database", err);
+  });
+
+app.get("/", (req, res) => res.send("<h1> Hello World By Omda </h1>"));
+
+app.listen(PORT, () => console.log(`app is running on port ${PORT}`));
